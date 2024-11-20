@@ -22,7 +22,7 @@ export function Header() {
                 <nav className='w-full flex items-center justify-between'>
                   <Link to="/">   <img src={logo} alt="Logo da loja" className='w-20' /></Link>
 
-                    {isLogged ? (<div className='flex items-center justify-center gap-1'><MdLogout className='text-2xl' /> Logout</div>) : (<div className='flex items-center justify-center gap-1'><FaRegCircleUser className='text-2xl' /> Login</div>)}
+                    {isLogged ? (<div className='flex items-center justify-center gap-1'><MdLogout className='text-2xl' /> Logout</div>) : (<div className='flex items-center justify-center gap-1'><Link to="/login"><FaRegCircleUser className='text-2xl' /> Login</Link></div>)}
                 </nav>
 
             </Container>
