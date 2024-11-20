@@ -17,7 +17,7 @@ export function Login() {
         const token = localStorage.getItem('egomarket-token');
         if (token) {
             setIsLogged(true);
-            navigate('/', { replace: true }); 
+            navigate('/', { replace: true });
         }
     }, [setIsLogged, navigate]);
 
@@ -29,11 +29,9 @@ export function Login() {
 
             console.log('Login successful', response.data);
 
-            // Salvar o token no localStorage
-            localStorage.setItem('egomarket-token', response.data.token); // Supondo que o token esteja em response.data.token
+            localStorage.setItem('egomarket-token', response.data.token);
             setIsLogged(true);
 
-            // Navegar para a página desejada após login
             navigate('/', { replace: true });
         } catch (error: any) {
             console.error('Erro ao fazer login', error.response || error.message);

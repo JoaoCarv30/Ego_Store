@@ -4,6 +4,7 @@ import RegisterProduct from "./pages/registerProcut";
 import { Login } from "./pages/login";
 import RegisterUser from "./pages/signup";
 import { Home } from "./pages/home";
+import { Private } from "./routes/private";
 
 const router = createBrowserRouter(
   [
@@ -16,7 +17,7 @@ const router = createBrowserRouter(
         },
         {
           path: "/registrar-produto",
-          element: <RegisterProduct />, //LEMBRAR DE PRIVAR O ACESSO AQUI
+          element: <Private><RegisterProduct /></Private>, //LEMBRAR DE PRIVAR O ACESSO AQUI
         },
         {
           path: "/cadastrar-usuario",

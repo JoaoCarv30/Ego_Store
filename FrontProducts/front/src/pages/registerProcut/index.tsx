@@ -6,32 +6,52 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { instance } from '@/services/axios'
+
 
 export default function RegisterProduct() {
 
 
-    const [image, setImage] = useState<File | null>(null); 
+    const [image, setImage] = useState<File | null>(null);
     const [name, setName] = useState<string>("")
     const [description, setDescription] = useState<string>("")
     const [price, setPrice] = useState<number>(0)
     const [amount, setAmount] = useState<number>(1)
 
-
-
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        console.log(registerProduct)
-    }
-
-    const registerProduct = {
-        image,
-        name,
-        description,
-        price,
-        amount
-    }
-
-
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+    
+        if (!image) {
+            alert('Por favor, selecione uma imagem!');
+            return;
+        }
+    
+        const formData = new FormData();
+        formData.append('Image', image);
+        formData.append('name', name);
+        formData.append('description', description);
+        formData.append('price', parseFloat(price.toString()).toFixed(2)); 
+        formData.append('stock', parseInt(amount.toString()).toFixed(0)); 
+    
+        try {
+            const token = localStorage.getItem('egomarket-token');
+            if (!token) {
+                throw new Error('Token de autorização ausente');
+            }
+    
+            const response = await instance.post('/products', formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+    
+            console.log('Produto registrado com sucesso:', response.data);
+        } catch (error: any) {
+            console.error('Erro ao registrar produto:', error.response?.data || error.message);
+        }
+    };
+    
 
     return (
         <Card className="w-full max-w-md mx-auto">
@@ -88,7 +108,7 @@ export default function RegisterProduct() {
                             min="1"
                             //   value={formData.amount} 
                             //   onChange={handleInputChange}
-                            onChange={(e) => setAmount(parseInt(e.target.value))} 
+                            onChange={(e) => setAmount(parseInt(e.target.value))}
                             required
                         />
                     </div>
