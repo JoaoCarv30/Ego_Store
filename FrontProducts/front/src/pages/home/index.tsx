@@ -1,5 +1,6 @@
 import { Container } from "@/components/container";
 import ProductCard from "@/components/productCard";
+import { instance } from "@/services/axios";
 
 import { useEffect, useState } from "react";
 
@@ -14,17 +15,30 @@ interface Product {
 export function Home() {
     const [products, setProducts] = useState<Product[]>([]);
 
-    useEffect(() => {
-        fetch('http://localhost:3000/products')
-            .then(response => response.json())
-            .then(data => {
-                setProducts(data);
-                console.log(data);
+    // useEffect(() => {
+    //     fetch('http://localhost:3000/products')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             setProducts(data);
+    //             console.log(data);
+    //         })
+    //         .catch((error) => {
+    //             console.error("Erro ao carregar os produtos", error);
+    //         });
+    // }, []);
+
+
+
+        useEffect(()=> {
+        instance.get('/products')
+            .then(response => {
+                setProducts(response.data);
             })
             .catch((error) => {
                 console.error("Erro ao carregar os produtos", error);
             });
-    }, []);
+        })
+
 
     return (
         <Container>

@@ -44,7 +44,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, price, title, descripti
                 </div>
             </div>
             <div className="p-4 bg-gray-100">
-                <button className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark transition duration-300">
+                <button className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark transition duration-300 transform hover:scale-105">
                     <FaWhatsapp className="inline" />
                     <span className="ml-2">Contate o vendedor</span>
                 </button>
