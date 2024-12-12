@@ -10,6 +10,9 @@ interface Product {
     price: number;
     Image: string;
     description: string;
+    User?: {
+        name: string;
+    };
 }
 
 export function Home() {
@@ -56,7 +59,7 @@ export function Home() {
                         title={product.name}
                         description={product.description}
                         user={{
-                            name: 'Admin',
+                            name: product.User?.name || 'Desconhecido',
                             avatar: 'https://avatars.githubusercontent.com/u/1024025?v=4',
                         }}
                     />

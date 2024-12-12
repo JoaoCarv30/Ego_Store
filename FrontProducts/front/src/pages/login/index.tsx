@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { instance } from '@/services/axios';
 import { LoginContext } from '@/contexts/loginContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export function Login() {
     const { setIsLogged } = useContext(LoginContext);
@@ -76,7 +76,7 @@ export function Login() {
                 </CardContent>
                 <CardFooter className="flex justify-between">
                     <Button variant="link">Esqueceu a senha?</Button>
-                    <Button variant="link">Criar uma conta</Button>
+                    <Link to="cadastrar-usuario"><Button variant="link">Criar uma conta</Button> </Link>
                 </CardFooter>
             </Card>
         </div>

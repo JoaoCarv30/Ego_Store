@@ -4,17 +4,22 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import { instance } from '@/services/axios'
 export default function RegisterUser() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // TODO: Implement registration logic here
-    console.log('Registration attempt with:', { email, password })
+  const navigate = useNavigate();
+
+
+  //VERIFICAR DEPOIS SE O USO DO TRY CATCH ESTÁ CORRETO
+  const handleSubmit =  (e: React.FormEvent) => {
+
+    instance.post('/users', { email, password, name })
+  
   }
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <Card className="w-full max-w-md">
@@ -24,6 +29,17 @@ export default function RegisterUser() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+              <Label htmlFor="text">Name</Label>
+              <Input 
+                id="name" 
+                type="text" 
+                placeholder="Cleiton Da silva" 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required 
+              />
+            </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input 
