@@ -45,8 +45,9 @@ export default function RegisterProduct() {
                     'Content-Type': 'multipart/form-data',
                 },
             });
+            window.alert('Produto cadastrado com sucesso!')
+            console.log('Produto cadastrado com sucesso:', response.data);
 
-            console.log('Produto registrado com sucesso:', response.data);
         } catch (error: any) {
             console.error('Erro ao registrar produto:', error.response?.data || error.message);
         }

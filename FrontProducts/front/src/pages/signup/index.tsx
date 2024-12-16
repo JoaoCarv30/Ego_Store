@@ -10,6 +10,7 @@ export default function RegisterUser() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
 
   const navigate = useNavigate();
 
@@ -17,11 +18,13 @@ export default function RegisterUser() {
   //VERIFICAR DEPOIS SE O USO DO TRY CATCH ESTÁ CORRETO
   const handleSubmit =  (e: React.FormEvent) => {
 
-    instance.post('/users', { email, password, name })
+    instance.post('/users', { email, password, name, phone })
+    window.alert('Usuário cadastrado com sucesso!')
+    navigate('/login', { replace: true })
   
   }
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-[calc(100vh-100px)] flex items-center justify-center bg-gray-100">
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Crie sua conta</CardTitle>
@@ -37,6 +40,17 @@ export default function RegisterUser() {
                 placeholder="Cleiton Da silva" 
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                required 
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="text">Phone</Label>
+              <Input 
+                id="phone" 
+                type="text" 
+                placeholder="(XX) XXXXX-XXXX" 
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 required 
               />
             </div>

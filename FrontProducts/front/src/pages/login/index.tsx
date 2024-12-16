@@ -12,6 +12,7 @@ export function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const token = localStorage.getItem('egomarket-token');
@@ -35,13 +36,14 @@ export function Login() {
             navigate('/', { replace: true });
         } catch (error: any) {
             console.error('Erro ao fazer login', error.response || error.message);
+            setError('Email ou senha inválidos');
         }
 
         console.log('Login attempt with:', { email, password });
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="min-h-[calc(100vh-100px)] flex items-center justify-center bg-gray-100">
             <Card className="w-full max-w-md">
                 <CardHeader>
                     <CardTitle className="text-2xl font-bold">Bem Vindo de Volta!</CardTitle>
@@ -73,10 +75,11 @@ export function Login() {
                         </div>
                         <Button type="submit" className="w-full">Entrar</Button>
                     </form>
+                    {error && <p className="text-red-500 text-center mt-2">{error}</p>}
                 </CardContent>
                 <CardFooter className="flex justify-between">
                     <Button variant="link">Esqueceu a senha?</Button>
-                    <Link to="cadastrar-usuario"><Button variant="link">Criar uma conta</Button> </Link>
+                    <Link to="/cadastrar-usuario"><Button variant="link">Criar uma conta</Button> </Link>
                 </CardFooter>
             </Card>
         </div>

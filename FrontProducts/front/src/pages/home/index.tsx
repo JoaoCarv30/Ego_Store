@@ -12,40 +12,41 @@ interface Product {
     description: string;
     User?: {
         name: string;
+        phone?: string;
     };
+    onclick?: () => void;
 }
 
 export function Home() {
     const [products, setProducts] = useState<Product[]>([]);
 
-    // useEffect(() => {
-    //     fetch('http://localhost:3000/products')
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             setProducts(data);
-    //             console.log(data);
-    //         })
-    //         .catch((error) => {
-    //             console.error("Erro ao carregar os produtos", error);
-    //         });
-    // }, []);
 
-
-
-        useEffect(()=> {
+    useEffect(() => {
         instance.get('/products')
             .then(response => {
                 setProducts(response.data);
+                console.log(response.data);
             })
             .catch((error) => {
                 console.error("Erro ao carregar os produtos", error);
             });
-        })
+    }, []);
+
+    const sendMessage = (phone: string) => {
+        console.log('Enviando mensagem para', phone);
+
+        const message = 'Olá, gostaria de comprar o produto';
+        const url = `https://api.whatsapp.com/send?phone=${phone}&text=${message}`;
+
+        window.open(url, '_blank');
+
+
+    };
 
 
     return (
         <Container>
-            <h1 className="m-2 font-bold text-2xl text-center">
+            <h1 className="m-2 mt-4 font-bold text-2xl text-center">
                 Compre seu produto com a gente!
             </h1>
 
@@ -53,15 +54,18 @@ export function Home() {
                 {products.map((product) => (
                     <ProductCard
                         key={product.id}
-                        image={`http://localhost:3000/images/${product.Image}`} 
+                        image={`http://localhost:3000/images/${product.Image}`}
                         name={product.name}
                         price={product.price}
                         title={product.name}
                         description={product.description}
                         user={{
                             name: product.User?.name || 'Desconhecido',
-                            avatar: 'https://avatars.githubusercontent.com/u/1024025?v=4',
+                            avatar: 'https://cdn.awsli.com.br/800x800/549/549871/produto/29108392/60cdfb3799.jpg',
                         }}
+
+                        onclick={() => sendMessage(product.User?.phone || '')}
+
                     />
                 ))}
             </main>

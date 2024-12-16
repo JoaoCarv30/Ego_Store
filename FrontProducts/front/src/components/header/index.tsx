@@ -17,6 +17,7 @@ export function Header() {
 
     function handleLogout() {
         setIsLogged(false);
+        localStorage.removeItem('egomarket-token');
 
 
     };
