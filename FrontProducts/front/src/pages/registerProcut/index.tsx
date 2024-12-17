@@ -1,4 +1,5 @@
 'use client'
+import 'react-toastify/dist/ReactToastify.css';
 
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
@@ -7,6 +8,8 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { instance } from '@/services/axios'
+
+import { ToastContainer, toast } from 'react-toastify'
 
 
 export default function RegisterProduct() {
@@ -45,10 +48,18 @@ export default function RegisterProduct() {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            window.alert('Produto cadastrado com sucesso!')
+            toast.success("Produto Cadastrado com sucesso!")
             console.log('Produto cadastrado com sucesso:', response.data);
 
+            setImage(null);
+            setName('');
+            setDescription('');
+            setPrice(0);
+            setAmount(0);
+
+
         } catch (error: any) {
+            toast.error("Erro ao cadastrar produto!")
             console.error('Erro ao registrar produto:', error.response?.data || error.message);
         }
     };
@@ -115,6 +126,7 @@ export default function RegisterProduct() {
                             />
                         </div>
                         <Button type="submit" className="w-full">Register Product</Button>
+                        <ToastContainer theme='colored' position='bottom-right' />
                     </form>
                 </CardContent>
             </Card>

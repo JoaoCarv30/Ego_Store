@@ -64,3 +64,45 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer base {
+  /* Toast Container */
+  .Toastify__toast-container {
+    @apply z-50;
+  }
+
+  /* Toast */
+  .Toastify__toast {
+    @apply bg-gray-800 text-white shadow-lg rounded-lg;
+  }
+
+  /* Toast Body */
+  .Toastify__toast-body {
+    @apply text-sm font-medium;
+  }
+
+  /* Success Toast */
+  .Toastify__toast--success {
+    @apply bg-green-500 text-white;
+  }
+
+  /* Error Toast */
+  .Toastify__toast--error {
+    @apply bg-red-500 text-white;
+  }
+
+  /* Info Toast */
+  .Toastify__toast--info {
+    @apply bg-blue-500 text-white;
+  }
+
+  /* Warning Toast */
+  .Toastify__toast--warning {
+    @apply bg-yellow-500 text-black;
+  }
+
+  /* Close Button */
+  .Toastify__close-button {
+    @apply text-white hover:text-gray-300;
+  }
+}

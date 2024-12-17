@@ -32,16 +32,25 @@ export function Home() {
             });
     }, []);
 
-    const sendMessage = (phone: string) => {
-        console.log('Enviando mensagem para', phone);
+    const sendMessage = (phone: string, message: string = 'Olá, gostaria de comprar o produto') => {
+        // Remove caracteres não numéricos e valida o número
+        const sanitizedPhone = phone.replace(/\D/g, ''); // Remove caracteres não numéricos
 
-        const message = 'Olá, gostaria de comprar o produto';
-        const url = `https://api.whatsapp.com/send?phone=${phone}&text=${message}`;
+        if (!sanitizedPhone || sanitizedPhone.length < 10) {
+            alert('Por favor, forneça um número de telefone válido com código do país.');
+            return;
+        }
 
-        window.open(url, '_blank');
+        // Codifica a mensagem para uso seguro na URL
+        const encodedMessage = encodeURIComponent(message);
 
+        // Gera o URL do WhatsApp
+        const whatsappURL = `https://wa.me/${sanitizedPhone}?text=${encodedMessage}`;
 
+        // Abre o link em uma nova aba
+        window.open(whatsappURL, '_blank');
     };
+
 
 
     return (

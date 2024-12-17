@@ -11,12 +11,12 @@ interface ProductCardProps {
     user: {
         name: string
         avatar: string
-        
+
     }
     onclick?: () => void
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ name, price, title, description, user, image, onclick = () => {} }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ name, price, title, description, user, image, onclick = () => { } }) => {
     return (
         <div className="bg-white shadow-md rounded-lg overflow-hidden max-w-sm">
             <div className="relative">
@@ -47,7 +47,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, price, title, descripti
             </div>
             <div className="p-4 bg-gray-100">
                 <button
-                    onClick={onclick} 
+                    onClick={onclick}
                     className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark transition duration-300 transform hover:scale-105"
                 >
                     <FaWhatsapp className="inline" />
